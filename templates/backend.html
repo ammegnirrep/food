@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="POST" id="target">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="add name">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="quantity" placeholder="add quantity">
+    </div>
+    <div class="form-group">
+        <input
+           type="text"
+           class="form-control datetime"
+           name="expiry_date"
+           placeholder="add expiry date"
+        >
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+  </form>
+
+<br />
+
+<div class="table-responsive">
+  <table class="table" id="flights">
+      <thead>
+          <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Expiry Date</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for cupboard_item in cupboard_items %}
+          <tr id={{ cupboard_item.id }}>
+              <th scope="row">{{ cupboard_item.name }}</th>
+              <td> {{cupboard_item.quantity}} </td>
+              <td> {{ cupboard_item.expiry_date}} </td>
+              <td> <a href="/edit/{{ cupboard_item.id }}">Edit</a> </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}

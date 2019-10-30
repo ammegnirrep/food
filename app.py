@@ -14,6 +14,7 @@ pusher_client = pusher.Pusher(
     cluster=os.getenv('PUSHER_CLUSTER'),
     ssl=True)
 
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()

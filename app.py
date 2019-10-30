@@ -86,6 +86,20 @@ def update_record(id):
 
         return render_template('update_cupboard_item.html', data=new_cupboard_item)
 
+@app.route('/delete/<id>', methods=["DELETE"])
+def delete_record(id):
+    item = CupboardItem.query.get(id)
+    db_session.delete(item)
+    db_session.commit()
+
+    data = {
+        "id": id,
+    }
+
+    pusher_client.trigger('table', 'delete-record', {'data': data })
+
+    return jsonify(success=True)
+
 # run Flask app
 if __name__ == "__main__":
     app.run()

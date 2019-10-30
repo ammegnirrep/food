@@ -29,6 +29,8 @@
               <th scope="col">Quantity</th>
               <th scope="col">Expiry Date</th>
               <th scope="col">Action</th>
+              <th scope="col">Delete</th>
+
           </tr>
       </thead>
       <tbody>
@@ -38,11 +40,20 @@
               <td> {{cupboard_item.quantity}} </td>
               <td> {{ cupboard_item.expiry_date}} </td>
               <td> <a href="/edit/{{ cupboard_item.id }}">Edit</a> </td>
+              <td> <a href="#" onclick="deleteItem({{ cupboard_item.id }})">Delete</a> </td>
+
           </tr>
       {% endfor %}
       </tbody>
   </table>
 </div>
+<script>
+function deleteItem(id) {
+  var deleteRequest = new XMLHttpRequest();
+  deleteRequest.open('DELETE', '/delete/' + id);
+  deleteRequest.send();
+}
+</script>
 <script> window.includeEditButton = true </script>
 
 {% endblock %}

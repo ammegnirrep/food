@@ -36,6 +36,10 @@
      `)
   });
 
+  channel.bind('delete-record', (data) => {
+    $(`#${data.data.id}`).remove();
+  });
+
   channel.bind('update-record', (data) => {
 
       const expiry_date = moment(`${data.data.expiry_date}`, 'DD/MM/YYYY hh:mm a').format('YYYY-MM-DD hh:mm:ss a')
